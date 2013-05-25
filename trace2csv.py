@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Written by Andres Erbsen and Sandra Schumann, distributed under the GNU GPLv3
 
 from sys import argv, stdout
 
