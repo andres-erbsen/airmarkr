@@ -2,7 +2,6 @@
 # Written by Andres Erbsen and Sandra Schumann, distributed under the GNU GPLv3
 
 import matplotlib.pyplot as plt
-import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
 from sys import argv
 
