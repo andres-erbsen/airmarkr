@@ -6,17 +6,29 @@ import numpy as np
 from mpl_toolkits.mplot3d import Axes3D
 from sys import argv
 
-toklines = [l.split(',')[:3] for l in open(argv[1]).read().splitlines()]
-coords = [(float(x), float(y), float(z)) for (x,y,z) in toklines ]
-x0,y0,z0 = list(zip(*coords[:1]))
-xs,ys,zs = list(zip(*coords))
+csvdata = (tuple(map(float,l.split(','))) for l in open(argv[1]).read().splitlines())
 
-fig = plt.figure()
-ax = fig.add_subplot(111, projection='3d')
-ax.scatter(xs, ys, zs)
-ax.scatter(x0, y0, z0, s=200, c='white', marker='H')
+moved = []
+painted = []
+button_pressed = False
+for (x,y,z,t,e) in csvdata:
+    if e == 1:
+        button_pressed = True
+    elif e == 2:
+        button_pressed = False
+    if button_pressed:
+        painted.append((x,y,z))
+    else:
+        moved.append((x,y,z))
 
+ax = plt.figure().add_subplot(111, projection='3d')
 
-neg, pos = min([min(xs),min(ys),min(zs)]), max([max(xs),max(ys),max(zs)])
+ax.scatter(*zip(*moved[:1]), s=200, c='white', marker='H')
+ax.scatter(*zip(*moved[1:]), c='white')
+if painted: ax.scatter(*zip(*painted))
+
+neg = min(map(min,moved+painted))
+pos = max(map(max,moved+painted))
 ax.auto_scale_xyz([neg, pos], [neg, pos], [neg, pos])
 plt.show()
+
