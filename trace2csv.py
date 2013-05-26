@@ -11,7 +11,7 @@ def sfloat(s):
 
 def buttonEvents(dat_file_contents):
     buttonlines = (l for l in dat_file_contents.splitlines() if l.startswith('Button'))
-    return [(float(t)/1000000000, e) for (t,e) in map(str.split,buttonlines)]
+    return [(float(t)/1000000000, e) for (e,t) in map(str.split,buttonlines)]
 
 def csvTrace(dat_file_contents, rtslam_log_contents):
     button = list(reversed(sorted(buttonEvents(dat_file_contents))))
@@ -28,7 +28,6 @@ def csvTrace(dat_file_contents, rtslam_log_contents):
             if button.pop()[1] == 'Buttondown':
                  buttonevent = 1
             else:
-                 assert e == 'Buttonup'
                  buttonevent = 2
         ret.append( (x,y,z,round(t*1000),buttonevent) )
     return '\n'.join("%f,%f,%f,%d,%d" % t for t in ret) + '\n'
