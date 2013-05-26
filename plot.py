@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from sys import argv
 
-csvdata = (tuple(map(float,l.split(','))) for l in open(argv[1]).read().splitlines())
+csvdata = (tuple(map(float,l.split())) for l in open(argv[1]).read().splitlines())
 
 moved = []
 painted = []

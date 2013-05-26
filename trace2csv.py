@@ -30,7 +30,7 @@ def csvTrace(dat_file_contents, rtslam_log_contents):
             else:
                  buttonevent = 2
         ret.append( (x,y,z,round(t*1000),buttonevent) )
-    return '\n'.join("%f,%f,%f,%d,%d" % t for t in ret) + '\n'
+    return '\n'.join("%f %f %f %d %d" % t for t in ret) + '\n'
 
 if __name__ == "__main__":
     stdout.write( csvTrace( open(argv[1]).read(), open(argv[2]).read() ) )
