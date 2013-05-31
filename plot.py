@@ -10,7 +10,7 @@ csvdata = (tuple(map(float,l.split())) for l in open(argv[1]).read().splitlines(
 moved = []
 painted = []
 button_pressed = False
-for (x,y,z,t,e) in csvdata:
+for (x,y,z,vx,vy,vz,t,e) in csvdata:
     if e == 1:
         button_pressed = True
     elif e == 2:
