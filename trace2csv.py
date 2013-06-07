@@ -23,6 +23,7 @@ def csvTrace(dat_file_contents, rtslam_log_contents):
     ret = []
     for tup in trace:
         t,_,x,y,z = tup[:5]
+        qw, qx, qy, qz = tup[11:15]
         vx, vy, vz = tup[15:18]
         buttonevent = 0
         while button and t > button[-1][0]:
@@ -30,7 +31,7 @@ def csvTrace(dat_file_contents, rtslam_log_contents):
                  buttonevent = 1
             else:
                  buttonevent = 2
-        ret.append( (x,y,z,vx,vy,vz,round(t*1000),buttonevent) )
+        ret.append( (x,y,z,qw,qx,qy,qz,vx,vy,vz,round(t*1000),buttonevent) )
     return '\n'.join("%f %f %f %f %f %f %d %d" % t for t in ret) + '\n'
 
 if __name__ == "__main__":
